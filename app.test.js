@@ -64,4 +64,25 @@ describe('Teste da lista de tarefas', () => {
     // Verifica se a lista de tarefas continua vazia
     expect(taskList.children.length).toBe(0);
   });
+  
+  test('Deve adicionar e completar três tarefas', () => {
+    const tarefas = ['Tarefa 1', 'Tarefa 2', 'Tarefa 3'];
+    
+    tarefas.forEach(tarefa => {
+      taskInput.value = tarefa;
+      addTaskBtn.click();
+    });
+
+    // Verifica se três tarefas foram adicionadas
+    expect(taskList.children.length).toBe(3);
+
+    // Marca cada tarefa como concluída ao clicar no botão excluir
+    Array.from(taskList.children).forEach((item) => {
+      const deleteBtn = item.querySelector('.delete-btn');
+      deleteBtn.click();
+    });
+
+    // Verifica se todas as tarefas foram removidas
+    expect(taskList.children.length).toBe(0);
+  });
 });
